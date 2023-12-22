@@ -14,11 +14,15 @@ class SuperBanServiceProvider extends ServiceProvider{
         });
 
         $this->registerMiddleware();
+
+        $this->mergeConfigFrom(__DIR__ . '/config/superban.php', 'superban');
     }
 
     public function boot() : void 
     {
-
+        $this->publishes([
+            __DIR__ . '/config/superban.php' => config_path('superban.php'),
+        ], 'superban');
     }
 
     protected function registerMiddleware() : void

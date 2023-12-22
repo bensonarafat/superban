@@ -27,5 +27,13 @@ class SuperBanServiceProviderTest extends TestCase{
         $this->assertArrayHasKey('superban', $routerMiddleware);
         $this->assertEquals(SuperBanMiddleware::class, $routerMiddleware['superban']);
     }
+
+    public function test_service_provider_merges_config() : void
+    {
+        $config = config('superban');
+        $this->assertArrayHasKey('requests_number', $config);
+        $this->assertArrayHasKey('ban_duration', $config);
+        $this->assertArrayHasKey('time_interval', $config);
+    }
 }
 ?>
