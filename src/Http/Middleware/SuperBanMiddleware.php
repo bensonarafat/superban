@@ -11,7 +11,7 @@ class SuperBanMiddleware
 
     protected SuperBanService $superBanService;
     
-    public function __construct($superBanService)
+    public function __construct(SuperBanService $superBanService)
     {
         $this->superBanService = $superBanService;
     }
