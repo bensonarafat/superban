@@ -10,7 +10,8 @@ class SuperBanServiceProvider extends ServiceProvider{
     public function register() : void
     {
         $this->app->singleton('superban', function ($app) {
-            return new SuperBanService();
+            $cache = $app->make('cache');
+            return new SuperBanService($cache);
         });
 
         $this->registerMiddleware();
