@@ -59,5 +59,24 @@ class SuperBanServiceTest extends TestCase{
 
         $this->assertTrue($result);
     }
+
+    public function test_ban_client_creates_ban_in_cache() :void 
+    {
+        $clientIdentifier = 'userXYZ';
+        $route = 'routeXYZ';
+        $banDuration = 60;
+
+        $service = new SuperBanService(app(Factory::class), app(RateLimiter::class));
+
+        $service->banClient($clientIdentifier, $route, $banDuration);
+
+        $cacheKey = "superban:$clientIdentifier:$route";
+
+        $ban = Cache::get($cacheKey);
+
+        $this->assertInstanceOf(SuperBan::class, $ban);
+        $this->assertEquals($clientIdentifier, $ban->client_identifier);
+        $this->assertEquals($route, $ban->route);
+    }
 }
 ?>

@@ -2,6 +2,7 @@
 namespace Edenlife\Superban;
 
 use Illuminate\Cache\RateLimiter;
+use Edenlife\Superban\Models\SuperBan;
 use Illuminate\Contracts\Cache\Factory;
 
 class SuperBanService {
@@ -32,7 +33,13 @@ class SuperBanService {
 
     public function banClient(string $clientIdentifier, string $route, int $banDuration) : void
     {
-
+        $key = $this->getCacheKey($clientIdentifier, $route);
+        $superban = new SuperBan([
+            'client_identifier' => $clientIdentifier,
+            'route' => $route,
+            'banned_until' => now()->addMinutes($banDuration),
+        ]);
+        $this->cache->put($key, $superban, now()->addMinutes($banDuration));
     }
 
     private function getCacheKey(string $identifier, string $route) : string
