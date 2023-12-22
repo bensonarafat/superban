@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/macbookpro/Desktop/package/superban/phpunit.xml.dist" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.338052">
+    <testsuite name="SuperBan Test Suite" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.338052">
+      <testsuite name="Edenlife\Superban\Tests\SuperBanServiceProviderTest" file="/Users/macbookpro/Desktop/package/superban/tests/SuperBanServiceProviderTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.338052">
+        <testcase name="test_service_provider_registers_superban_singleton" file="/Users/macbookpro/Desktop/package/superban/tests/SuperBanServiceProviderTest.php" line="15" class="Edenlife\Superban\Tests\SuperBanServiceProviderTest" classname="Edenlife.Superban.Tests.SuperBanServiceProviderTest" assertions="1" time="0.338052"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
