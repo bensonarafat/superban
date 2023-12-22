@@ -4,6 +4,7 @@ namespace Edenlife\Superban\Tests;
 use Orchestra\Testbench\TestCase;
 use Edenlife\Superban\SuperBanService;
 use Edenlife\Superban\SuperBanServiceProvider;
+use Edenlife\Superban\Http\Middleware\SuperBanMiddleware;
 
 class SuperBanServiceProviderTest extends TestCase{
 
@@ -18,6 +19,13 @@ class SuperBanServiceProviderTest extends TestCase{
             SuperBanService::class,
             $this->app->make('superban')
         );
+    }
+
+    public function test_service_provider_registers_middleware() : void
+    {
+        $routerMiddleware = $this->app['router']->getMiddleware();
+        $this->assertArrayHasKey('superban', $routerMiddleware);
+        $this->assertEquals(SuperBanMiddleware::class, $routerMiddleware['superban']);
     }
 }
 ?>
