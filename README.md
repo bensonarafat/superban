@@ -84,6 +84,8 @@ The middleware parameter can be explained in the table below:
 | Ban duration   | Amount minutes for which the user will be banned for    | 1440              |   
 
 
+## Addition
+
 If no parameter was passed in middleware like so `->middleware('superban')` i.e without specification the `number of request`, `time interval` and `ban duration`. The package will use the default configuration. 
 
 You can also change this to your own desire like so
