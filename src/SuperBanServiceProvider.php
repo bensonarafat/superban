@@ -4,6 +4,7 @@ namespace Edenlife\Superban;
 use Edenlife\Superban\SuperBanService;
 use Illuminate\Support\ServiceProvider;
 use Edenlife\Superban\Http\Middleware\SuperBanMiddleware;
+use Illuminate\Cache\RateLimiter;
 
 class SuperBanServiceProvider extends ServiceProvider{
     
@@ -11,7 +12,7 @@ class SuperBanServiceProvider extends ServiceProvider{
     {
         $this->app->singleton('superban', function ($app) {
             $cache = $app->make('cache');
-            return new SuperBanService($cache);
+            return new SuperBanService($cache, $app->make(RateLimiter::class));
         });
 
         $this->registerMiddleware();

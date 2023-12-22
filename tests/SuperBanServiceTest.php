@@ -16,7 +16,7 @@ class SuperBanServiceTest extends TestCase{
         return [SuperBanServiceProvider::class];
     }
 
-    public function test_is_banned_returns_true_when_banned()
+    public function test_is_banned_returns_true_when_banned() : void
     {
         $cacheKey = 'superban:user123:route123';
         $clientIdentifier = 'user123';
@@ -33,6 +33,29 @@ class SuperBanServiceTest extends TestCase{
         $service = new SuperBanService(app(Factory::class), app(RateLimiter::class));
 
         $result = $service->isBanned($clientIdentifier, $route);
+
+        $this->assertTrue($result);
+    }
+
+    public function test_is_banned_returns_false_when_not_banned() : void
+    {
+        $clientIdentifier = 'user456';
+        $route = 'route456';
+
+        $service = new SuperBanService(app(Factory::class), app(RateLimiter::class));
+
+        $result = $service->isBanned($clientIdentifier, $route);
+
+        $this->assertFalse($result);
+    }
+
+    public function test_is_attempt_reached_returns_true_when_attempt_reached(): void 
+    {
+        $clientIdentifier = 'user789';
+        $numberOfRequests = 3;
+        $timeInterval = 2;
+        $service = new SuperBanService(app(Factory::class), app(RateLimiter::class));
+        $result = $service->isAttemptReached($clientIdentifier, $numberOfRequests, $timeInterval);
 
         $this->assertTrue($result);
     }
